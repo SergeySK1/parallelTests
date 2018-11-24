@@ -26,21 +26,25 @@ public class SetupDriver {
 
           return initDriver.get();
         }
-        else{
-            boxDriver.put(selectBrowser, browserSetup(selectBrowser));
-            initDriver.set(boxDriver.get(selectBrowser));
-        }
+        boxDriver.put(selectBrowser, browserSetup(selectBrowser));
+        initDriver.set(boxDriver.get(selectBrowser));
+
         return initDriver.get();
     }
 
     private static WebDriver browserSetup(String selectBrowser){
-        switch (selectBrowser){
-            case "chrome":
-                driver = initChromeDriver();
-                break;
-            case "firefox":
-                driver = initMozilaDriver();
-                break;
+        try {
+            switch (selectBrowser) {
+                case "chrome":
+                    driver = initChromeDriver();
+                    break;
+                case "firefox":
+                    driver = initMozilaDriver();
+                    break;
+            }
+        }
+        catch (Exception e){
+            System.out.println("browserSetup - Error" + e);
         }
         return driver;
     }
