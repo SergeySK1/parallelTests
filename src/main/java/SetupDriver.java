@@ -42,7 +42,7 @@ public class SetupDriver {
                     driver = initMozilaDriver();
                     break;
             }
-        }
+         }
         catch (Exception e){
             System.out.println("browserSetup - Error" + e);
         }
