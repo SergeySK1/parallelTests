@@ -4,13 +4,11 @@ import org.testng.annotations.*;
 
 public class TestOne extends SetupDriver {
 
-    private String browserName="";
     private WebDriver driver;
 
     @BeforeTest()
     @Parameters({"browserName"})
     public void initBeforeTest(String browserName){
-        this.browserName = browserName;
         driver = getDriver(browserName);
     }
 
