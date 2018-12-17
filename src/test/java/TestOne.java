@@ -1,40 +1,55 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
+import Driver.SetupDriver;
 import org.testng.annotations.*;
+import page.MarketForm;
+import page.SearchBlock;
+import page.SearchForm;
 
 public class TestOne extends SetupDriver {
 
-    private WebDriver driver;
+    private SearchForm searchForm;
+    private MarketForm marketForm;
 
     @BeforeTest()
-    @Parameters({"browserName"})
-    public void initBeforeTest(String browserName){
-        driver = getDriver(browserName);
+    @Parameters({"browserName", "url"})
+    public void initBeforeTest(String browserName, String url){
+        System.out.println(browserName);
+        selectBrowser = browserName;
+        getDriver().get(url);
     }
 
     @BeforeClass()
     public void setup(){
-        driver.get("https://www.yandex.ru/");
+        searchForm = new SearchForm();
+        marketForm = new MarketForm();
     }
 
-
     @Test(priority = 1)
-    public void oneTest(){
-        driver.findElement(By.id("text")).sendKeys("Погода");
-        driver.findElement(By.cssSelector(".search2__button")).click();
-        driver.findElement(By.cssSelector(".logo_type_link")).click();
+    @Parameters({"weather"})
+    public void oneTest(String weather){
+        searchForm.searchAndGo(weather);
+        searchForm.checkFirstResultLink("yandex.ru");
+        searchForm.goToStartPage();
     }
 
     @Test(priority = 2)
-    public void twoTest(){
-        driver.findElement(By.id("text")).sendKeys("Автомобили");
-        driver.findElement(By.cssSelector(".search2__button")).click();
-        driver.findElement(By.cssSelector(".logo_type_link")).click();
+    @Parameters({"weatherInUSA"})
+    public void twoTest(String weatherInUSA){
+        searchForm.searchAndGo(weatherInUSA);
+        searchForm.checkFirstResultLink("yandex.ru");
+        searchForm.goToStartPage();
+    }
+
+    @Test(priority = 3)
+    @Parameters({"tabs"})
+    public void thirdTest(String tabsSearch){
+        marketForm.goToTabs();
+        marketForm.searchMarketPlace(tabsSearch);
     }
 
     @AfterClass()
-    public void removeDriver(){
-        super.removeDriver();
+    public void removeDriverThis(){
+        removeDriver();
     }
 
 }
