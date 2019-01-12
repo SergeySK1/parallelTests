@@ -13,36 +13,27 @@ public class SetupDriver {
 
     private static final ThreadLocal<WebDriver> initDriver = new ThreadLocal<>();
     private WebDriver driver;
-    private static Map<String, WebDriver> boxDriver;
     protected static String selectBrowser="";
 
 
     public synchronized WebDriver getDriver(){
-        getInstance(selectBrowser);
-        return initDriver.get();
+        return getInstance(selectBrowser);
     }
 
     public void removeDriver(){
         initDriver.get().quit();
     }
 
-    private void getInstance(String selectBrowser){
-        initBoxDriver();
-        if(boxDriver != null && boxDriver.containsKey(selectBrowser)){
-          return;
+    private WebDriver getInstance(String selectBrowser){
+        if(initDriver.get() != null){
+          return initDriver.get();
         }
-        boxDriver.put(selectBrowser, browserSetup(selectBrowser));
-        initDriver.set(boxDriver.get(selectBrowser));
+        initDriver.set(browserSetup(selectBrowser));
+        return initDriver.get();
     }
 
-    private static void initBoxDriver(){
-        if(boxDriver!=null){
-            return;
-        }
-        boxDriver = new HashMap<>();
-    }
 
-    private   WebDriver browserSetup(String selectBrowser){
+    private  WebDriver browserSetup(String selectBrowser){
         if (driver==null) {
             try {
                 switch (selectBrowser) {

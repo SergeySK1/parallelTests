@@ -30,11 +30,8 @@ public class Waits  extends SetupDriver{
     }
 
     public String getAttribute(By locator, String value){
-        String str = null;
-        if(isElementEnabled(locator)) {
-           str = driver.findElement(locator).getAttribute(value);
-        }
-        return str;
+
+        return driver.findElement(locator).getAttribute(value);
     }
 
     public boolean isElementEnabled(By locator){
