@@ -8,12 +8,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Waits  extends SetupDriver{
+import java.lang.management.ManagementFactory;
+import java.lang.management.OperatingSystemMXBean;
 
-    private WebDriver driver;
+public class Waits extends SetupDriver{
+
+    protected WebDriver driver;
+
+
 
     public Waits(){
-        this.driver = getDriver();
+      this.driver = SetupDriver.getDriver();
     }
 
       WebElement waitElementToClick(By locator){
@@ -45,4 +50,5 @@ public class Waits  extends SetupDriver{
         }
         return false;
     }
+
 }

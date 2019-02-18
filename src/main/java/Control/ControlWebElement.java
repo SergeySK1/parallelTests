@@ -8,7 +8,8 @@ import org.openqa.selenium.By;
 public class ControlWebElement extends Waits {
 
 
-    public ControlWebElement(){
+    public ControlWebElement() {
+
     }
 
     public void clickWebElement(By locator){

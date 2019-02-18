@@ -1,8 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestOne" parallel="tests" thread-count="2">
+    <parameter name="url" value="https://www.yandex.ru/"/>
+
+    <listeners>
+        <listener class-name="InitTestParameter"/>
+    </listeners>
     <test name="test-one 1">
-        <parameter name="browserName" value="chrome"/>
-        <parameter name="url" value="https://www.yandex.ru/"/>
+        <!--<parameter name="browserName" value="chrome"/>-->
+        <!--<parameter name="url" value="https://www.yandex.ru/"/>-->
         <parameter name="weather" value="Погода"/>
         <parameter name="weatherInUSA" value="Погода в США"/>
         <parameter name="tabs" value="IPad"/>
@@ -11,8 +16,8 @@
         </classes>
     </test>
     <test name="test-one 2">
-        <parameter name="browserName" value="firefox" />
-        <parameter name="url" value="https://www.yandex.ru/"/>
+        <!--<parameter name="browserName" value="firefox" />
+        <parameter name="url" value="https://www.yandex.ru/"/>-->
         <parameter name="weather" value="Погода"/>
         <parameter name="weatherInUSA" value="Погода в США"/>
         <parameter name="tabs" value="IPad"/>
