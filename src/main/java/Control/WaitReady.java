@@ -4,8 +4,7 @@ import Driver.SetupDriver;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.TestNG;
-import org.testng.internal.thread.ThreadUtil;
+
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,6 +16,7 @@ public class WaitReady extends Waits {
 
 
     private static int  sleepTimeout;
+    volatile static int  countThread = 1;
 
     static {
         try {
@@ -40,10 +40,13 @@ public class WaitReady extends Waits {
                 wait.until(w-> {
                     boolean result =
                             ((JavascriptExecutor) w).executeScript("return " +
-                       //             "document.querySelector([\".serp.serp__spin.i-bem.serp_js_inited.serp_loading_yes.serp__spin_progress_yes\"])==null || " +
+                                   "document.querySelector([\".serp.serp__spin.i-bem.serp_js_inited.serp_loading_yes.serp__spin_progress_yes\"])==null || " +
                                     "document.readyState").equals("complete");
                     if (!result) {
-                        System.out.println("FALSE");
+                        if(countThread == 1) {
+                           new MyThread().start();
+                            countThread--;
+                        }
                     }
 
                     return result;

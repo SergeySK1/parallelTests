@@ -4,7 +4,7 @@ import Driver.SetupDriver;
 import org.testng.*;
 
 
-public class InitTestParameter implements  ITestListener {
+public class InitTestParameter implements ITestListener   {
 
 
     @Override
@@ -34,14 +34,13 @@ public class InitTestParameter implements  ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        String url = context.getSuite().getParameter("url");
-        SetupDriver.getDriver().get(url);
+   //     String url = context.getSuite().getParameter("url");
+        SetupDriver.getDriver()/*.get(url);*/;
     }
 
     @Override
     public void onFinish(ITestContext context) {
         SetupDriver.removeDriver();
     }
-
 
 }

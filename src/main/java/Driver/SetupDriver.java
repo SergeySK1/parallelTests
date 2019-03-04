@@ -9,7 +9,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Properties;
+import java.util.*;
 
 
 public class SetupDriver {
@@ -18,6 +18,7 @@ public class SetupDriver {
     private static WebDriver driver;
 
     protected static String browserName = "";
+    private static String url = "";
 
 
     static{
@@ -26,6 +27,7 @@ public class SetupDriver {
             Properties properpty = new Properties();
             properpty.load(file);
             browserName = properpty.getProperty("ch");
+            url = properpty.getProperty("url");
         }catch (IOException e ){
             System.out.println(e);
         }
@@ -36,7 +38,10 @@ public class SetupDriver {
             return initDriver.get();
         }
 
-        initDriver.set(browserSetup(browserName));
+        synchronized (SetupDriver.class) {
+            initDriver.set(browserSetup(browserName));
+            initDriver.get().get(url);
+        }
         return initDriver.get();
     }
 

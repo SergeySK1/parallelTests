@@ -1,11 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="TestOne" parallel="tests" thread-count="2">
-    <parameter name="url" value="https://www.yandex.ru/"/>
+<suite name="TestOne" parallel="tests" thread-count="4">
 
     <listeners>
         <listener class-name="InitTestParameter"/>
     </listeners>
-    <test name="test-one 1">
+    <test name="test-one 1" >
         <!--<parameter name="browserName" value="chrome"/>-->
         <!--<parameter name="url" value="https://www.yandex.ru/"/>-->
         <parameter name="weather" value="Погода"/>
@@ -15,7 +14,7 @@
             <class name="TestOne"/>
         </classes>
     </test>
-    <test name="test-one 2">
+    <test name="test-one 2" >
         <!--<parameter name="browserName" value="firefox" />
         <parameter name="url" value="https://www.yandex.ru/"/>-->
         <parameter name="weather" value="Погода"/>

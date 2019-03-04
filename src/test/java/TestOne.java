@@ -1,17 +1,16 @@
 
-import Driver.SetupDriver;
+
 import org.testng.annotations.*;
 import page.MarketForm;
 import page.SearchForm;
 
-public class TestOne {
+public class TestOne  extends BaseTest{
 
     private SearchForm searchForm;
     private MarketForm marketForm;
 
 
-
-    @BeforeClass()
+    @BeforeClass(alwaysRun = true)
     public void setup(){
         searchForm = new SearchForm();
         marketForm = new MarketForm();
@@ -20,7 +19,7 @@ public class TestOne {
 
     @Test(priority = 1)
     @Parameters({"weather"})
-    public void oneTest(String weather){
+    public void oneTest(@Optional("Автомобили") String weather){
         searchForm.searchAndGo(weather);
         searchForm.checkFirstResultLink("yandex.ru");
         searchForm.goToStartPage();
